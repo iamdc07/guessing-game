@@ -11,4 +11,3 @@ def create_game_data():
         else:
             words.append(x)
 
-    print(words)
