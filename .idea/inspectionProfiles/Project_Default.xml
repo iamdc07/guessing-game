@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="stringDatabase" />
+          <option value="game" />
         </list>
       </option>
     </inspection_tool>
