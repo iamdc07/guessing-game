@@ -29,19 +29,19 @@ letter_frequency = {
 
 game_data = {}
 round_score = 0
-gameid = 0
+game_id = 0
 count = 0
 
 
 def modify_score(user_input, status, user_guess, current_guess):
     global letter_frequency
     global game_data
-    global gameid
+    global game_id
     global count
 
     if user_input == 't':
-        current_word = game_data[gameid]['word']
-        score = game_data[gameid]['score']
+        current_word = game_data[game_id]['word']
+        score = game_data[game_id]['score']
 
         index = 0
         for eachLetter in current_guess:
@@ -54,12 +54,12 @@ def modify_score(user_input, status, user_guess, current_guess):
         if count > 0:
             score = score / count
 
-        game_data[gameid]['score'] = score
-        game_data[gameid]['status'] = 'Gave up'
+        game_data[game_id]['score'] = score
+        game_data[game_id]['status'] = 'Gave up'
     elif user_input == 'g':
-        current_word = game_data[gameid]['word']
-        score = game_data[gameid]['score']
-        bad_guesses = game_data[gameid]['bad_guesses']
+        current_word = game_data[game_id]['word']
+        score = game_data[game_id]['score']
+        bad_guesses = game_data[game_id]['bad_guesses']
         index = 0
 
         if status:
@@ -70,17 +70,17 @@ def modify_score(user_input, status, user_guess, current_guess):
                     score += points
                     index += 1
 
-            game_data[gameid]['score'] = score
-            game_data[gameid]['status'] = 'Success'
+            game_data[game_id]['score'] = score
+            game_data[game_id]['status'] = 'Success'
         else:
             score -= (score * 0.1)
             bad_guesses += 1
-            game_data[gameid]['bad_guesses'] = bad_guesses
-            game_data[gameid]['score'] = score
+            game_data[game_id]['bad_guesses'] = bad_guesses
+            game_data[game_id]['score'] = score
     elif user_input == 'l':
         count += 1
-        score = game_data[gameid]['score']
-        missed_letters = game_data[gameid]['missed_letters']
+        score = game_data[game_id]['score']
+        missed_letters = game_data[game_id]['missed_letters']
 
         if status:
             points = letter_frequency[user_guess]
@@ -88,32 +88,32 @@ def modify_score(user_input, status, user_guess, current_guess):
         else:
             score -= (score * 0.1)
             missed_letters += 1
-            game_data[gameid]['missed_letters'] = missed_letters
+            game_data[game_id]['missed_letters'] = missed_letters
 
         if current_guess.find('-') != -1:
             score = score / 10
-            game_data[gameid]['status'] = "Success"
+            game_data[game_id]['status'] = "Success"
 
-        game_data[gameid]['score'] = score
+        game_data[game_id]['score'] = score
 
 
 def create_scoreboard(current_word):
     global game_data
-    global gameid
+    global game_id
     global count
     count = 0
-    gameid += 1
-    game_data[gameid] = {}
-    game_data[gameid]['word'] = current_word
-    game_data[gameid]['status'] = ''
-    game_data[gameid]['bad_guesses'] = 0
-    game_data[gameid]['missed_letters'] = 0
-    game_data[gameid]['score'] = 0
+    game_id += 1
+    game_data[game_id] = {}
+    game_data[game_id]['word'] = current_word
+    game_data[game_id]['status'] = ''
+    game_data[game_id]['bad_guesses'] = 0
+    game_data[game_id]['missed_letters'] = 0
+    game_data[game_id]['score'] = 0
 
 
 def display_scoreboard():
     global game_data
-    sum = 0
+    final_score = 0
     print("\n\nGame\t" + "Word" + "\tStatus" + "\tBad Guesses" + "\tMissed Letters" + "\tScore")
     print("----\t----\t------\t-----------\t--------------\t-----")
 
@@ -121,7 +121,7 @@ def display_scoreboard():
         if value['status'] != '':
             line = "{}\t{}\t{}\t{}\t\t{}\t\t{}".format(key, value['word'], value['status'], value['bad_guesses'],
                                                        value['missed_letters'], value['score'])
-            sum += value['score']
+            final_score += value['score']
             print(line)
 
-    print('\nFinal score: ', sum)
+    print('\nFinal score: ', final_score)

@@ -9,7 +9,8 @@ dB.load_game_data()
 def start_game():
     print("\n")
     print("*** Guessing Game ***")
-    display_ui()
+    while True:
+        display_ui()
 
 
 def display_ui(random_word=None, guess="----"):
@@ -17,7 +18,6 @@ def display_ui(random_word=None, guess="----"):
         random_word = dB.fetch_random_word()
         game.create_scoreboard(random_word)
 
-    # print("\nCurrent Guess: ", random_word)
     print("Current Guess: ", guess)
 
     user_input = input("\nWhat you'd like to do? g = guess, t = tell me, l for guess a letter, and q to quit\n")
@@ -29,7 +29,6 @@ def display_ui(random_word=None, guess="----"):
         game.modify_score(user_input, False, "t", guess)
         print("\nBetter luck next time!!")
         print("Word: ", random_word)
-        display_ui()
     elif user_input.lower() == 'l':
         user_guess = input("\nEnter your guess: ")
         guess = check_letter_guess(user_input, guess, user_guess, random_word)
@@ -38,7 +37,6 @@ def display_ui(random_word=None, guess="----"):
             print("\nGood guess, genius!")
             print("The word was ", guess)
             print("-----------------------")
-            display_ui()
         else:
             display_ui(random_word, guess)
     elif user_input.lower() == 'g':
@@ -46,10 +44,7 @@ def display_ui(random_word=None, guess="----"):
         status = check_word_guess(user_guess, random_word)
         game.modify_score(user_input, status, user_guess, guess)
 
-        if status:
-            display_ui()
-        else:
-            display_ui(random_word, guess)
+        display_ui(random_word, guess)
     else:
         print("\nWrong input, Try again!")
         print("-----------------------")
