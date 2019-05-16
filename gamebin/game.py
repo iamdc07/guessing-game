@@ -30,12 +30,14 @@ letter_frequency = {
 game_data = {}
 round_score = 0
 gameid = 0
+count = 0
 
 
 def modify_score(user_input, status, user_guess, current_guess):
     global letter_frequency
     global game_data
     global gameid
+    global count
 
     if user_input == 't':
         current_word = game_data[gameid]['word']
@@ -48,6 +50,9 @@ def modify_score(user_input, status, user_guess, current_guess):
                 points = letter_frequency[letter]
                 score -= points
                 index += 1
+
+        if count > 0:
+            score = score / count
 
         game_data[gameid]['score'] = score
         game_data[gameid]['status'] = 'Gave up'
@@ -73,23 +78,30 @@ def modify_score(user_input, status, user_guess, current_guess):
             game_data[gameid]['bad_guesses'] = bad_guesses
             game_data[gameid]['score'] = score
     elif user_input == 'l':
+        count += 1
         score = game_data[gameid]['score']
         missed_letters = game_data[gameid]['missed_letters']
 
         if status:
             points = letter_frequency[user_guess]
             score += points
-            game_data[gameid]['score'] = score
         else:
             score -= (score * 0.1)
             missed_letters += 1
             game_data[gameid]['missed_letters'] = missed_letters
-            game_data[gameid]['score'] = score
+
+        if current_guess.find('-') != -1:
+            score = score / 10
+            game_data[gameid]['status'] = "Success"
+
+        game_data[gameid]['score'] = score
 
 
 def create_scoreboard(current_word):
     global game_data
     global gameid
+    global count
+    count = 0
     gameid += 1
     game_data[gameid] = {}
     game_data[gameid]['word'] = current_word

@@ -1,5 +1,6 @@
 import stringDatabase as dB
 import game
+import pydoc
 import sys
 
 dB.load_game_data()
@@ -16,7 +17,7 @@ def display_ui(random_word=None, guess="----"):
         random_word = dB.fetch_random_word()
         game.create_scoreboard(random_word)
 
-    print("\nCurrent Guess: ", random_word)
+    # print("\nCurrent Guess: ", random_word)
     print("Current Guess: ", guess)
 
     user_input = input("\nWhat you'd like to do? g = guess, t = tell me, l for guess a letter, and q to quit\n")
