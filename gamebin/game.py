@@ -94,7 +94,6 @@ def modify_score(user_input, status, user_guess, current_guess):
             points = letter_frequency[user_guess]
             score += points
         else:
-            score -= (score * 0.1)
             missed_letters += 1
             game_data[game_id]['missed_letters'] = missed_letters
 
