@@ -3,6 +3,9 @@ words = []
 
 
 def load_game_data():
+    """
+    Load the words into the python script and store it in a data structure
+    """
     global words
     f = open(r'four_letters.txt', 'r')
     for x in f.read().split():
@@ -14,4 +17,7 @@ def load_game_data():
 
 
 def fetch_random_word():
+    """
+    Get a random word from the word pool
+    """
     return words[random.randint(0, 4029)]

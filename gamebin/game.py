@@ -34,6 +34,14 @@ count = 0
 
 
 def modify_score(user_input, status, user_guess, current_guess):
+    """
+    Modify the score on each player interaction
+
+    :param user_input: Player selection from the provided operations
+    :param status: boolean
+    :param user_guess: Player's guess for the current word
+    :param current_guess: Current word guess
+    """
     global letter_frequency
     global game_data
     global game_id
@@ -98,6 +106,10 @@ def modify_score(user_input, status, user_guess, current_guess):
 
 
 def create_scoreboard(current_word):
+    """
+    Create a scoreboard to keep track of each round
+    :param current_word: Current word to be guessed (hidden)
+    """
     global game_data
     global game_id
     global count
@@ -112,6 +124,9 @@ def create_scoreboard(current_word):
 
 
 def display_scoreboard():
+    """
+    Display the scoreboard after the game ends
+    """
     global game_data
     final_score = 0
     print("\n\nGame\t" + "Word" + "\tStatus" + "\tBad Guesses" + "\tMissed Letters" + "\tScore")

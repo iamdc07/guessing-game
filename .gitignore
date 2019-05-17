@@ -1,4 +1,7 @@
 .idea/**/workspace.xml
+gamebin/game.html
+gamebin/guess.html
+gamebin/stringDatabase.html
 venv/bin/__pycache__/
 venv/lib/python3.6/site-packages/Babel-2.6.0.dist-info/
 venv/lib/python3.6/site-packages/Jinja2-2.10.1.dist-info/

@@ -7,6 +7,9 @@ dB.load_game_data()
 
 
 def start_game():
+    """
+    Starts the game
+    """
     print("\n")
     print("*** Guessing Game ***")
     while True:
@@ -14,6 +17,12 @@ def start_game():
 
 
 def display_ui(random_word=None, guess="----"):
+    """
+    Display the UI to the player
+    :param random_word: A random word selected from the word pool
+    :param guess: Current word guess
+    :return:
+    """
     if random_word is None and guess == "----":
         random_word = dB.fetch_random_word()
         game.create_scoreboard(random_word)
@@ -52,6 +61,13 @@ def display_ui(random_word=None, guess="----"):
 
 
 def check_word_guess(user_guess, current_word):
+    """
+    Check player's guess against the current word
+
+    :param user_guess: Player's guess for the current word
+    :param current_word: Current word to be guessed (hidden)
+    :return: boolean
+    """
     if user_guess == current_word:
         print("\nGood guess, genius!")
         print("The word was ", current_word)
@@ -63,6 +79,15 @@ def check_word_guess(user_guess, current_word):
 
 
 def check_letter_guess(user_input, current_guess, user_guess, current_word):
+    """
+    Check player's guess against the current word
+
+    :param user_input: Player selection from the provided operations
+    :param current_guess: Current word guess
+    :param user_guess: Player's guess for the current word
+    :param current_word: Current word to be guessed (hidden)
+    :return: string
+    """
     word = ''
     index = 0
     count = 0
